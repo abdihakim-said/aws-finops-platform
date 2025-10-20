@@ -1,0 +1,38 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["CostOptimization", "EstimatedMonthlySavings"],
+          [".", "VolumesOptimized"],
+          [".", "SnapshotsDeleted"]
+        ],
+        "period": 86400,
+        "stat": "Sum",
+        "region": "us-east-1",
+        "title": "Cost Optimization Metrics"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/Billing", "EstimatedCharges", "Currency", "USD"]
+        ],
+        "period": 86400,
+        "stat": "Maximum",
+        "region": "us-east-1",
+        "title": "Monthly AWS Costs"
+      }
+    },
+    {
+      "type": "log",
+      "properties": {
+        "query": "SOURCE '/aws/lambda/ebs-volume-optimizer'\n| fields @timestamp, @message\n| filter @message like /Optimized volume/\n| sort @timestamp desc\n| limit 20",
+        "region": "us-east-1",
+        "title": "Recent Optimizations"
+      }
+    }
+  ]
+}

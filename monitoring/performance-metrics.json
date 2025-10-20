@@ -1,0 +1,34 @@
+{
+  "dashboard_name": "FinOps Platform Performance",
+  "widgets": [
+    {
+      "title": "Cost Optimization Execution Time",
+      "metrics": [
+        ["AWS/Lambda", "Duration", "FunctionName", "ebs-volume-optimizer"],
+        [".", ".", ".", "ec2-rightsizing"],
+        [".", ".", ".", "s3-lifecycle-optimizer"]
+      ]
+    },
+    {
+      "title": "Optimization Success Rate",
+      "metrics": [
+        ["AWS/Lambda", "Errors", "FunctionName", "ebs-volume-optimizer"],
+        ["AWS/Lambda", "Invocations", "FunctionName", "ebs-volume-optimizer"]
+      ]
+    },
+    {
+      "title": "Monthly Cost Savings Trend",
+      "metrics": [
+        ["CostOptimization", "EstimatedMonthlySavings"]
+      ]
+    },
+    {
+      "title": "Resources Optimized Daily",
+      "metrics": [
+        ["CostOptimization", "VolumesOptimized"],
+        ["CostOptimization", "SnapshotsDeleted"],
+        ["CostOptimization", "InstancesRightsized"]
+      ]
+    }
+  ]
+}
