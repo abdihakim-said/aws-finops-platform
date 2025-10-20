@@ -1,0 +1,52 @@
+# AWS FinOps Platform - Development Dependencies
+
+# Include production requirements
+-r requirements.txt
+
+# Code Quality and Formatting
+black>=23.7.0
+isort>=5.12.0
+flake8>=6.0.0
+pylint>=2.17.0
+mypy>=1.5.0
+
+# Testing Framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+pytest-asyncio>=0.21.0
+moto>=4.2.0  # AWS service mocking
+
+# Security Scanning
+bandit>=1.7.0
+safety>=2.3.0
+
+# Documentation
+mkdocs>=1.5.0
+mkdocs-material>=9.2.0
+mkdocs-mermaid2-plugin>=1.1.0
+
+# Development Tools
+pre-commit>=3.4.0
+tox>=4.11.0
+coverage>=7.3.0
+
+# Debugging and Profiling
+ipdb>=0.13.0
+memory-profiler>=0.61.0
+line-profiler>=4.1.0
+
+# Local Development
+localstack>=2.2.0  # Local AWS services
+docker>=6.1.0
+
+# API Documentation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0
+
+# Performance Testing
+locust>=2.16.0
+
+# Infrastructure Testing
+terraform-compliance>=1.3.0
+checkov>=2.4.0  # Terraform security scanning
