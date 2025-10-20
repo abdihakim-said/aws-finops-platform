@@ -84,7 +84,7 @@
 ```bash
 git clone https://github.com/Abdihakim-said/aws-finops-platform.git
 cd aws-finops-platform
-./setup-backend.sh
+./scripts/setup-backend.sh
 ```
 
 ### 2. Deploy Infrastructure
@@ -96,7 +96,7 @@ terraform apply -var-file=environments/prod.tfvars
 
 ### 3. Verify Deployment
 ```bash
-./validate-production.sh
+./scripts/validate-production.sh
 ```
 
 ## 📁 Project Structure
@@ -120,11 +120,20 @@ aws-finops-platform/
 │   ├── k8s_resource_optimizer.py
 │   ├── eks_cost_optimizer.py
 │   └── multi_account_governance.py
+├── docs/                     # Documentation
+│   ├── ARCHITECTURE.md       # System design
+│   ├── LAMBDA_FUNCTIONS_GUIDE.md
+│   └── BUSINESS_CASE.md      # ROI analysis
+├── scripts/                  # Deployment & utility scripts
+│   ├── deploy-production.sh
+│   ├── setup-backend.sh
+│   └── cleanup.sh
+├── assets/                   # Images and diagrams
 ├── monitoring/               # CloudWatch dashboards
-├── documentation/            # Technical documentation
+├── tests/                    # Automated tests
+├── examples/                 # Demo and examples
 ├── TROUBLESHOOTING.md       # Diagnostic guide
-├── CHALLENGES.md            # Technical exercises
-└── cleanup.sh               # Resource cleanup script
+└── CHALLENGES.md            # Technical exercises
 ```
 
 ## 🎯 Key Features by Category

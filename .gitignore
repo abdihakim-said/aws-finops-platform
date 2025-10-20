@@ -53,3 +53,16 @@ secrets/
 *.key
 *.crt
 *.pem
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+.DS_Store?
+
+# Terraform state (should be in backend only)
+terraform.tfstate
+terraform.tfstate.backup
