@@ -51,7 +51,7 @@ module "monitoring" {
   
   environment         = "dev"
   project_name       = "aws-finops-platform"
-  notification_email = "dev-team@company.com"
+  notification_email = var.notification_email
   cost_threshold     = 500
   lambda_function_arns = module.lambda_functions.lambda_function_arns
   common_tags = {

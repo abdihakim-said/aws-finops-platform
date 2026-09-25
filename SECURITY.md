@@ -1,36 +1,17 @@
-# Security & Compliance
+# Security
 
-## Security Model
+## Safety model for automated changes
 
-### IAM Least Privilege
-- Lambda functions use minimal required permissions
-- Cross-account access via AssumeRole only
-- No hardcoded credentials or secrets
+- `cost_optimizer` and `unused_resources_cleanup` can modify or delete resources. Both are **dry-run by default**. They only act when the Lambda has `DRY_RUN=false`, and an event with `{"dryRun": true}` always forces a dry run.
+- Snapshots that back an AMI, snapshots created by AWS Backup, and snapshots tagged `finops:keep=true` are never deleted.
+- A security group is treated as "in use" if any network interface references it, or another group's rules reference it.
+- `tests/test_dry_run.py` enforces these rules in CI.
 
-### Data Protection
-- All data encrypted in transit (TLS 1.2+)
-- CloudWatch logs encrypted at rest
-- No PII or sensitive data stored
+## Known gaps
 
-### Audit & Compliance
-- All optimization actions logged to CloudTrail
-- Cost allocation tags for financial governance
-- Rollback capabilities for all automated changes
+- The Lambda IAM role still allows destructive EC2/RDS actions on `Resource: "*"`. In a real account, scope it with tag conditions (e.g. `aws:ResourceTag/finops:managed = true`).
+- There is no approval workflow. For anything beyond dev, route proposed changes to a human (SNS/Slack → approve) instead of acting directly.
 
-## Risk Mitigation
+## Reporting
 
-### Approval Workflows
-- High-impact changes (>£1000) require approval
-- Dry-run mode for testing optimizations
-- Gradual rollout across environments
-
-### Monitoring & Alerting
-- Real-time failure detection
-- Cost anomaly alerts within 5 minutes
-- Performance degradation monitoring
-
-## Compliance Frameworks
-- **SOC 2 Type II** - Audit logging and access controls
-- **ISO 27001** - Information security management
-- **GDPR** - No personal data processing
-- **PCI DSS** - Secure configuration management
+Please open a GitHub issue, or contact me via my GitHub profile, for anything security-related.

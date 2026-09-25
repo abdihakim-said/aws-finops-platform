@@ -64,7 +64,6 @@ if [ $WORKING_COUNT -eq $TOTAL_COUNT ]; then
     echo "🎉 ALL FUNCTIONS WORKING!"
     echo ""
     echo "💰 Platform Status: FULLY OPERATIONAL"
-    echo "📈 Expected Savings: £16,000-50,000/month"
     echo "🔄 Automation: 24/7 cost optimization active"
     
     # Check schedules

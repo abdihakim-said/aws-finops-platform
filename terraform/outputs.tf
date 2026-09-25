@@ -97,18 +97,6 @@ output "eventbridge_rules" {
   value       = module.lambda_functions.eventbridge_rules
 }
 
-# Cost Optimization Metrics
-output "estimated_monthly_savings" {
-  description = "Estimated monthly cost savings from platform deployment"
-  value = {
-    tier_1_critical  = "£5,000-12,000"
-    tier_2_strategic = "£8,000-25,000"
-    tier_3_analytics = "£2,000-8,000"
-    tier_4_governance = "£1,000-5,000"
-    total_potential  = "£16,000-50,000"
-  }
-}
-
 # Deployment Information
 output "deployment_timestamp" {
   description = "Timestamp of the deployment"

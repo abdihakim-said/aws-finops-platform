@@ -259,14 +259,3 @@ output "dashboard_url" {
   description = "Production CloudWatch dashboard"
   value       = module.monitoring.dashboard_url
 }
-
-output "estimated_monthly_savings" {
-  description = "Estimated monthly cost savings"
-  value = {
-    critical_functions  = "£5,000-12,000"
-    strategic_functions = "£8,000-25,000"
-    analytics_functions = "£2,000-8,000"
-    governance_functions = "£1,000-5,000"
-    total_potential     = "£16,000-50,000"
-  }
-}

@@ -101,10 +101,6 @@ metrics: ## Display cost optimization metrics
 	@echo "Displaying optimization metrics..."
 	python scripts/utilities/display_metrics.py
 
-benchmark: ## Run performance benchmarks
-	@echo "Running performance benchmarks..."
-	python benchmark.py
-
 # Documentation
 docs: ## Generate documentation
 	@echo "Generating documentation..."

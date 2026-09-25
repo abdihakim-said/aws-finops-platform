@@ -66,3 +66,6 @@ __pycache__/
 # Terraform state (should be in backend only)
 terraform.tfstate
 terraform.tfstate.backup
+
+# Lambda packages are built by Terraform (archive_file)
+*.zip

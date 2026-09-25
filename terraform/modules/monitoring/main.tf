@@ -72,7 +72,7 @@ resource "aws_ce_anomaly_monitor" "finops_anomaly_monitor" {
   monitor_specification = jsonencode({
     Dimensions = {
       Key          = "LINKED_ACCOUNT"
-      Values       = ["880385175593"]
+      Values       = [data.aws_caller_identity.current.account_id]
       MatchOptions = ["EQUALS"]
     }
   })
@@ -148,3 +148,5 @@ resource "aws_cloudwatch_metric_alarm" "lambda_duration_alarm" {
 
   tags = var.common_tags
 }
+
+data "aws_caller_identity" "current" {}
