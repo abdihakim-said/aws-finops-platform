@@ -75,4 +75,4 @@ aws lambda invoke --function-name <dev-cost-optimizer> --payload '{"dryRun": tru
 
 ---
 
-**Abdihakim Said**, AWS Solutions Architect · CKA. Contact details are on my [GitHub profile](https://github.com/abdihakim-said).
+**Abdihakim Said**, AWS Solutions Architect Associate · CKA. Contact details are on my [GitHub profile](https://github.com/abdihakim-said).
