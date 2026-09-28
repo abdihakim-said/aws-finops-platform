@@ -6,6 +6,8 @@ An open-source tool that finds common AWS waste and turns it into a **plan**, li
 
 Finding waste is easy. **Removing it safely is the hard part**: an automated clean-up that deletes the wrong snapshot or slows down a production disk costs more than the bill it saved. This tool is built around that problem.
 
+![Demo: scan, preview, the world changes, apply skips what changed](docs/demo.gif)
+
 ```mermaid
 flowchart LR
   S[EventBridge<br/>weekly] --> SCAN[scan Lambda<br/>read-only role]
