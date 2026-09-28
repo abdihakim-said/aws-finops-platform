@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-finops"
+version = "2.0.0"
+description = "Find AWS waste and fix it only after a person approves the plan"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Abdihakim Said" }]
+dependencies = ["boto3>=1.34"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "moto[ec2,s3,sns,elbv2,rds,cloudwatch,sts]>=5", "ruff>=0.5"]
+
+[project.scripts]
+finops = "finops.cli:main"
+
+[tool.setuptools]
+packages = ["finops"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 115
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

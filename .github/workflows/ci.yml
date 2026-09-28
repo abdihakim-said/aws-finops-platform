@@ -1,10 +1,9 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
-    branches: [main, develop]
 
 permissions:
   contents: read
@@ -12,29 +11,30 @@ permissions:
 jobs:
   python:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - run: pip install boto3 pytest
-      - name: Byte-compile Lambda functions
-        run: python -m py_compile lambda-functions/*.py
-      - name: Safety tests (destructive actions are dry-run by default)
-        run: pytest -q tests/
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: pytest -q
+      - name: Offline demo
+        run: python examples/demo.py
 
   terraform:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: [dev, staging, production]
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.6
+          terraform_version: 1.9.8
+      - run: terraform fmt -recursive -check terraform
       - name: Validate
-        working-directory: terraform/environments/${{ matrix.environment }}
+        working-directory: terraform/examples/basic
         run: |
           terraform init -backend=false -input=false
           terraform validate

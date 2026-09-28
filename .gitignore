@@ -4,68 +4,22 @@
 *.tfvars
 .terraform/
 .terraform.lock.hcl
-terraform.tfstate.backup
-
-# AWS
-.aws/
-*.pem
+.build/
 
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-env/
+*.egg-info/
+.venv/
 venv/
-ENV/
-env.bak/
-venv.bak/
 .pytest_cache/
+.ruff_cache/
 
-# IDE
+# Local plans may contain account and resource IDs
+plan.json
+
+# IDE / OS
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
-
-# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Logs
-*.log
-logs/
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# Secrets
-secrets/
-*.key
-*.crt
-*.pem
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-
-# macOS
-.DS_Store
-.DS_Store?
-
-# Terraform state (should be in backend only)
-terraform.tfstate
-terraform.tfstate.backup
-
-# Lambda packages are built by Terraform (archive_file)
-*.zip

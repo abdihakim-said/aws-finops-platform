@@ -1,16 +1,14 @@
 # Security
 
-## Safety model for automated changes
+## Safety model
 
-- `cost_optimizer` and `unused_resources_cleanup` can modify or delete resources. Both are **dry-run by default**. They only act when the Lambda has `DRY_RUN=false`, and an event with `{"dryRun": true}` always forces a dry run.
-- Snapshots that back an AMI, snapshots created by AWS Backup, and snapshots tagged `finops:keep=true` are never deleted.
-- A security group is treated as "in use" if any network interface references it, or another group's rules reference it.
-- `tests/test_dry_run.py` enforces these rules in CI.
-
-## Known gaps
-
-- The Lambda IAM role still allows destructive EC2/RDS actions on `Resource: "*"`. In a real account, scope it with tag conditions (e.g. `aws:ResourceTag/finops:managed = true`).
-- There is no approval workflow. For anything beyond dev, route proposed changes to a human (SNS/Slack → approve) instead of acting directly.
+- **Scanning never changes anything.** The scan function's IAM role has read permissions only, plus writing plans to its own bucket and publishing to its own topic.
+- **Changes need a named approver and the plan digest.** The apply function acts only on actions listed in a stored plan, only if the caller supplies the digest of that exact plan, and only before the plan expires (7 days).
+- **Every action is re-checked at apply time.** A volume that is no longer gp2, a snapshot whose source volume came back or that now backs an AMI, or an Elastic IP that was attached since the scan is skipped. If the check itself fails (for example throttling), the action is skipped, never assumed safe.
+- **Applying is off by default.** The apply function returns `disabled` unless `enable_apply = true` in Terraform.
+- **`finops:keep=true` is enforced twice:** in code, and by an explicit IAM `Deny` on the apply role.
+- **The apply role can do three things:** `ec2:ModifyVolume`, `ec2:DeleteSnapshot`, `ec2:ReleaseAddress`. It cannot delete volumes, instances, databases or load balancers; those findings are report-only.
+- **Plans contain account and resource IDs.** They are stored in a private, versioned, encrypted bucket that denies non-TLS access, and expire after 180 days.
 
 ## Reporting
 
