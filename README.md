@@ -8,6 +8,10 @@ Finding waste is easy. **Removing it safely is the hard part**: an automated cle
 
 ![Demo: scan, preview, the world changes, apply skips what changed](docs/demo.gif)
 
+![Architecture walkthrough: scan writes a plan, a named person approves, apply re-checks then acts](docs/images/architecture-flow.gif)
+
+<sub>Static diagram: [docs/images/architecture.png](docs/images/architecture.png)</sub>
+
 ```mermaid
 flowchart LR
   S[EventBridge<br/>weekly] --> SCAN[scan Lambda<br/>read-only role]
