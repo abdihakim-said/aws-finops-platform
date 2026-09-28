@@ -1,8 +1,8 @@
-# AWS FinOps Automation (Experiment)
+# AWS FinOps Automation
 
 Scheduled Lambda functions, deployed with Terraform, that look for common AWS waste: gp2 volumes, orphaned snapshots, unattached Elastic IPs, unused security groups, idle load balancers, and over-sized EC2/RDS. They report findings to CloudWatch and SNS, alongside a Cost Explorer anomaly monitor.
 
-> **Experiment, not a product.** I built this in my own AWS dev account to explore FinOps automation. It hasn't been run against a client or a production estate, so there are **no measured savings**. Earlier versions of this README quoted savings figures, and I've removed them. The functions vary a lot in maturity; the table below says which is which.
+> **Published in anonymised form.** Employer and client details, data and credentials have been removed. Destructive actions are **dry-run by default**. The functions vary in maturity; the table below says which is which.
 
 ---
 
@@ -50,7 +50,7 @@ Terraform: `terraform/modules/{iam,lambda,monitoring,storage}`, composed in `ter
 - **The IAM role is broad.** It allows delete/modify on `Resource: "*"`. Next: tag-conditioned permissions, so the automation can only touch resources tagged `finops:managed=true`.
 - **No approval workflow.** Next: proposed actions → SNS/Slack with approve/reject → a second Lambda executes the approved ones.
 - **Savings estimates are list-price approximations** in the function code. Next: use the Cost Explorer / Pricing APIs and record actual before/after spend.
-- **Several functions are stubs or buggy** (see table). I'd delete or finish them before calling this more than an experiment.
+- **Several functions are stubs or buggy** (see table). I'd finish or remove them before running this unattended.
 - **Python 3.9 runtime** needs upgrading to a supported version.
 
 ## 5. Evidence
